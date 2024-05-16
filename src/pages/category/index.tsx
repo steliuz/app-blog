@@ -141,7 +141,7 @@ const DocumentationPage: FC = () => {
   };
 
   const getImage = (url: string) => {
-    const isUrl = `https://ll6zw4n2-3000.use2.devtunnels.ms${url}`;
+    const isUrl = `http://localhost:3000${url}`;
 
     return isUrl;
   };

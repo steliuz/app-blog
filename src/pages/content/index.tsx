@@ -61,8 +61,6 @@ const DocumentationPage: FC = () => {
   const onCreateContent = async (value: any) => {
     const data = value;
 
-    console.log('data: ', data);
-
     const imageFile = fileList[0]?.originFileObj;
 
     if (imageFile) {
@@ -139,7 +137,6 @@ const DocumentationPage: FC = () => {
   };
 
   const clearForm = () => {
-    console.log('clearing form');
     form.resetFields();
   };
 

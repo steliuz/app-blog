@@ -91,7 +91,7 @@ export const request = <T = any>(
   data?: any,
   config?: AxiosRequestConfig,
 ): MyResponse<T> => {
-  const prefix = 'https://ll6zw4n2-3000.use2.devtunnels.ms/v1';
+  const prefix = 'http://localhost:3000/v1';
 
   if (url != '/user/menu') {
     url = prefix + url;

@@ -17,14 +17,14 @@ import { loginAsync, registerAsync } from '../../stores/user.action';
 import { LoginPage, WraperLogin } from './loginStyle';
 
 const initialValues: LoginParams = {
-  email: 'jesus2@hotmail.com',
-  password: '123654asd',
+  email: '',
+  password: '',
 };
 const initialValuesRegister: RegisterParams = {
-  name: 'stz23',
-  email: 'jesus@gmail.com',
+  name: '',
+  email: '',
   role: RoleEnum.creator,
-  password: 'Atcode2024*',
+  password: '',
 };
 
 const LoginForm: FC = () => {

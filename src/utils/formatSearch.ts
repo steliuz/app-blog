@@ -6,8 +6,6 @@ export function formatSearch(se: string) {
   let newarr = [];
 
   arr.forEach((v, i) => {
-    console.log(v);
-    console.log(i);
     newarr = v.split('=');
 
     if (typeof obj[newarr[0]] === 'undefined') {

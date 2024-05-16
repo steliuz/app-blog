@@ -17,5 +17,5 @@ export const getImage = (url: string) => {
     return url;
   }
 
-  return `https://ll6zw4n2-3000.use2.devtunnels.ms${url}`;
+  return `http://localhost:3000${url}`;
 };

@@ -34,7 +34,7 @@ const DocumentationPage: FC = () => {
       return window.open(url, '_blank');
     }
 
-    window.open(`https://ll6zw4n2-3000.use2.devtunnels.ms${url}`, '_blank');
+    window.open(`http://localhost:3000${url}`, '_blank');
   };
 
   useEffect(() => {
