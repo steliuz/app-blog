@@ -1,50 +1,26 @@
-English | [简体中文](./README.zh_CN.md)
+<p>
+<a href="https://dev.to/steliuz25"><img src="https://img.shields.io/badge/dev.to-Follow-lightgrey?style=social&logo=dev.to" alt="dev.to"></a>&ensp;</p>
 
-<h1 align="center">React Antd Admin</h1>
+## 🚀 About Me
 
-<div align="center">
+### Hi there 👋, I am Jesús Alberto Rosales
 
-The best practices for React Hooks and Typescript.
+##### I'm a creative web developer with over 7 years of experience, passionate about blending design and technology. I excel in frontend development, leveraging my design skills and adeptness with new technologies to craft user-friendly websites and mobile applications.
 
-<a href="https://github.com/facebook/react">
-  <img src="https://img.shields.io/badge/react-17.0.0-brightgreen" alt="React">
-</a>
-<a href="https://github.com/ant-design/ant-design">
-  <img src="https://img.shields.io/badge/ant--design-5.2.0-brightgreen" alt="ant-design">
-</a>
-<a href="https://github.com/microsoft/TypeScript" rel="nofollow">
-  <img src="https://img.shields.io/badge/typescript-4.3.2-brightgreen" alt="Typescript">
-</a>
-<a href="https://github.com/reduxjs/redux" rel="nofollow">
-  <img src="https://img.shields.io/badge/@reduxjs/toolkit-1.4.0-brightgreen" alt="Redux">
-</a>
-<a href="https://github.com/WinmezzZ/react-antd-admin/blob/master/LICENSE">
-  <img src="https://img.shields.io/github/license/mashape/apistatus.svg" alt="license">
-</a>
+"Known for my proactive and organized approach, I'm driven by a passion for learning and a love for programming. I thrive on challenges, constantly seeking to enhance my skills and tackle new projects. Transitioning to full-stack development three years ago, I've embraced a wider array of technologies and responsibilities."
 
-</div>
+- 🔭 Known for my proactive and organized approach
+- 🌱 I'm driven by a passion for learning and a love for programming
+- 🏗 I thrive on challenges, Transitioning to full-stack development three years ago, I've embraced a wider array of technologies and responsibilities.
+- 💬 Constantly seeking to enhance my skills and tackle new projects
+- 📫 How to reach me jesusrosales19@gmail.com
 
-- Preview: https://react-admin.winme.dev
-- Documentation: https://react-admin.winme.dev/documentation
-
-## ✨ Features
-
-- 💡 **TypeScript**: A language for application-scale JavaScript
-- 📜 **Blocks**: Build page with block template
-- 💎 **Hooks**: Use react hooks API instead of traditional class API
-- 📐 **Common Templates**: Typical templates for enterprise applications
-- 🚀 **State of The Art Development**: Newest development stack of React/hooks/Redux/antd/typescript
-- 📱 **Responsive**: Designed for variable screen sizes
-- 🎨 **Theming**: Dynamically switch system theme
-- 🌐 **International**: Built-in i18n solution
-- ⚙️ **Best Practices**: Solid workflow to make your code healthy
-- 🔢 **Mock development**: Easy to use mock development solution
-- ✅ **Usage**: No barriers to use with complete documentation and detailed comments
+---
 
 ## 📦 Install
 
 ```bash
-$ git clone https://github.com/WinmezzZ/react-antd-admin.git
+$ git clone https://github.com/steliuz/app-blog.git
 $ cd react-antd-admin
 
 # npm
@@ -70,18 +46,10 @@ $ yarn start
 
 This project default deploy on root site, if you want to deploy on a child site, you need to set the public path. In the `.env` file at the root of this project, add `PUBLIC_URL=YOUR_CHILD_PATH`.
 
-## 🖥 Browsers support
+###
 
-Modern browsers and Internet Explorer 10+.
+## 🔗 Social(Tech) Profiles
 
-| [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/edge/edge_48x48.png" alt="IE / Edge" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>IE / Edge | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png" alt="Firefox" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Firefox | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png" alt="Chrome" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Chrome | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/safari/safari_48x48.png" alt="Safari" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Safari | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/opera/opera_48x48.png" alt="Opera" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Opera | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/electron/electron_48x48.png" alt="Electron" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Electron |
-| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| IE11, Edge                                                                                                                                                                                                      | last 2 versions                                                                                                                                                                                                   | last 2 versions                                                                                                                                                                                               | last 2 versions                                                                                                                                                                                               | last 2 versions                                                                                                                                                                                           | last 2 versions                                                                                                                                                                                                       |
+<p align='left'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="https://linkedin.com/in/jesús-rosales-532b93158" target="_blank"><img height="35" width="35" src="https://www.svgrepo.com/show/448234/linkedin.svg" /></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
 
-## 🤝 Contributing
-
-We very much welcome your contribution, you can build together with us in the following ways 😃
-
-- Use Ant Design Pro in your daily work.
-- Submit [GitHub issues](https://github.com/WinmezzZ/react-antd-admin/issues) to report bugs or ask questions.
-- Propose [Pull Request](https://github.com/WinmezzZ/react-antd-admin/pulls) to improve our code.
+---

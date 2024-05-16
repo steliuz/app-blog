@@ -1,7 +1,7 @@
 export enum RoleEnum {
   reader = 'reader',
   admin = 'admin',
-  creator = 'creator',
+  creator = 'creador',
 }
 
 export interface LoginParams {
@@ -9,12 +9,34 @@ export interface LoginParams {
   password: string;
 }
 export interface RegisterParams {
-  username: string;
+  name: string;
   email: string;
   password: string;
   role: RoleEnum;
 }
 
+export interface TokenInfo {
+  token: string;
+  expires: string;
+}
+
+export interface Tokens {
+  access: TokenInfo;
+  refresh: TokenInfo;
+}
+
+export interface User {
+  name: string;
+  email: string;
+  role: string;
+  isEmailVerified: boolean;
+  id: string;
+}
+
+export interface UserWithTokens {
+  user: User;
+  tokens: Tokens;
+}
 export interface LoginResult {
   token: string;
   username: string;
@@ -22,7 +44,7 @@ export interface LoginResult {
 }
 
 export interface LogoutParams {
-  token: string;
+  refreshToken: string;
 }
 
 export interface LogoutResult {}

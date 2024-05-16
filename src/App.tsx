@@ -8,14 +8,19 @@ import { Suspense, useEffect } from 'react';
 import { IntlProvider } from 'react-intl';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { HistoryRouter, history } from '@/routes/history';
+import { history, HistoryRouter } from '@/routes/history';
 
-import { LocaleFormatter, localeConfig } from './locales';
+import { localeConfig, LocaleFormatter } from './locales';
 import RenderRouter from './routes';
 import { setGlobalState } from './stores/global.store';
 
 const App: React.FC = () => {
-  const { locale } = useSelector(state => state.user);
+  interface UserState {
+    [x: string]: any;
+    locale: string;
+  }
+
+  const { locale } = useSelector((state: UserState) => state.user);
   const { theme, loading } = useSelector(state => state.global);
   const dispatch = useDispatch();
 
@@ -27,7 +32,6 @@ const App: React.FC = () => {
     );
   };
 
-  /** initial theme */
   useEffect(() => {
     setTheme(theme === 'dark');
 
@@ -43,8 +47,6 @@ const App: React.FC = () => {
     }
   }, []);
 
-  // set the locale for the user
-  // more languages options can be added here
   useEffect(() => {
     if (locale === 'en_US') {
       dayjs.locale('en');
@@ -75,7 +77,7 @@ const App: React.FC = () => {
         algorithm: theme === 'dark' ? antdTheme.darkAlgorithm : antdTheme.defaultAlgorithm,
       }}
     >
-      <IntlProvider locale={locale.split('_')[0]} messages={localeConfig[locale]}>
+      <IntlProvider locale={locale.split('_')[0]} messages={localeConfig[locale as keyof typeof localeConfig]}>
         <HistoryRouter history={history}>
           <Suspense fallback={null}>
             <Spin

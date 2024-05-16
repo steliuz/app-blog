@@ -5,7 +5,6 @@ import axios from 'axios';
 
 import store from '@/stores';
 import { setGlobalState } from '@/stores/global.store';
-// import { history } from '@/routes/history';
 
 const axiosInstance = axios.create({
   timeout: 6000,
@@ -18,6 +17,12 @@ axiosInstance.interceptors.request.use(
         loading: true,
       }),
     );
+
+    if (config && config.headers) {
+      const token = localStorage.getItem('token');
+
+      config.headers.Authorization = `Bearer ${token}`;
+    }
 
     return config;
   },
@@ -51,12 +56,11 @@ axiosInstance.interceptors.response.use(
         loading: false,
       }),
     );
-    // if needs to navigate to login page when request exception
-    // history.replace('/login');
-    let errorMessage = '系统异常';
+
+    let errorMessage = 'error';
 
     if (error?.message?.includes('Network Error')) {
-      errorMessage = '网络错误，请检查您的网络';
+      errorMessage = 'error';
     } else {
       errorMessage = error?.message;
     }
@@ -73,6 +77,7 @@ axiosInstance.interceptors.response.use(
 );
 
 export type Response<T = any> = {
+  [x: string]: any;
   status: boolean;
   message: string;
   result: T;
@@ -80,25 +85,26 @@ export type Response<T = any> = {
 
 export type MyResponse<T = any> = Promise<Response<T>>;
 
-/**
- *
- * @param method - request methods
- * @param url - request url
- * @param data - request data or params
- */
 export const request = <T = any>(
   method: Lowercase<Method>,
   url: string,
   data?: any,
   config?: AxiosRequestConfig,
 ): MyResponse<T> => {
-  // const prefix = '/api'
-  const prefix = '';
+  const prefix = 'https://ll6zw4n2-3000.use2.devtunnels.ms/v1';
 
-  url = prefix + url;
+  if (url != '/user/menu') {
+    url = prefix + url;
+  }
 
   if (method === 'post') {
     return axiosInstance.post(url, data, config);
+  } else if (method === 'delete') {
+    return axiosInstance.delete(url, data);
+  } else if (method === 'put') {
+    delete data.id;
+
+    return axiosInstance.put(url, data);
   } else {
     return axiosInstance.get(url, {
       params: data,

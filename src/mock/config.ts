@@ -9,7 +9,7 @@ Mock.setup({
   timeout: 300,
 });
 
-export type ArrayElementType<T> = T extends (infer U)[] ? U : any; // Mock the real back-end api structure.
+export type ArrayElementType<T> = T extends (infer U)[] ? U : any;
 
 interface PageParams {
   pageSize?: number;
@@ -25,13 +25,13 @@ export function intercepter(data: any, page?: PageParams) {
 
     return {
       status: true,
-      message: '成功',
+      message: '',
       result,
     };
   } else {
     return {
       status: true,
-      message: '成功',
+      message: '',
       result: data,
     };
   }

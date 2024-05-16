@@ -1,9 +1,16 @@
-import type { LoginParams, LoginResult, LogoutParams, LogoutResult } from '../interface/user/login';
+import type {
+  LoginParams,
+  LoginResult,
+  LogoutParams,
+  LogoutResult,
+  RegisterParams,
+  UserWithTokens,
+} from '../interface/user/login';
 
 import { request } from './request';
 
-/** 登录接口 */
-export const apiLogin = (data: LoginParams) => request<LoginResult>('post', '/user/login', data);
+export const apiLogin = (data: LoginParams) => request<LoginResult>('post', '/auth/login', data);
 
-/** 登出接口 */
-export const apiLogout = (data: LogoutParams) => request<LogoutResult>('post', '/user/logout', data);
+export const apiRegister = (data: RegisterParams) => request<UserWithTokens>('post', '/auth/register', data);
+
+export const apiLogout = (data: LogoutParams) => request<LogoutResult>('post', '/auth/logout', data);

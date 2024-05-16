@@ -8,13 +8,14 @@ import { Drawer, FloatButton, Layout, theme as antTheme } from 'antd';
 import { Suspense, useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Outlet, useLocation } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 
-import { getMenuList } from '@/api/layout.api';
+import { getMe, getMenuList } from '@/api/layout.api';
 import { setUserItem } from '@/stores/user.store';
 import { getFirstPathCode } from '@/utils/getFirstPathCode';
 import { getGlobalState } from '@/utils/getGloabal';
 
-import { useGuide } from '../guide/useGuide';
+import { useGuide } from '../thematic/useGuide';
 import HeaderComponent from './header';
 import MenuComponent from './menu';
 
@@ -26,8 +27,9 @@ const LayoutPage: FC = () => {
   const [openKey, setOpenkey] = useState<string>();
   const [selectedKey, setSelectedKey] = useState<string>(location.pathname);
   const [menuList, setMenuList] = useState<MenuList>([]);
-  const { device, collapsed, newUser } = useSelector(state => state.user);
+  const { device, collapsed, newUser, logged } = useSelector(state => state.user);
   const token = antTheme.useToken();
+  const navigate = useNavigate();
 
   const isMobile = device === 'MOBILE';
   const dispatch = useDispatch();
@@ -76,10 +78,22 @@ const LayoutPage: FC = () => {
       );
     }
   }, [dispatch]);
+  const fetchMe = useCallback(async () => {
+    await getMe();
+  }, [dispatch]);
 
   useEffect(() => {
-    fetchMenuList();
+    if (!logged) {
+      navigate({ pathname: '/login' });
+    }
   }, []);
+
+  useEffect(() => {
+    if (logged) {
+      fetchMenuList();
+      fetchMe();
+    }
+  }, [logged]);
 
   useEffect(() => {
     window.onresize = () => {
@@ -141,13 +155,12 @@ const LayoutPage: FC = () => {
           </Drawer>
         )}
         <Content className="layout-page-content">
-          {/* <TagsView /> */}
           <Suspense fallback={null}>
             <Outlet />
           </Suspense>
         </Content>
       </Layout>
-      <FloatButton type="primary" icon={<PlusOutlined />} onClick={() => console.log('onClick')} />
+      <FloatButton type="primary" icon={<PlusOutlined />} onClick={() => navigate({ pathname: '/content' })} />
     </Layout>
   );
 };

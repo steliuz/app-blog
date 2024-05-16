@@ -25,6 +25,8 @@ type Action = 'userInfo' | 'userSetting' | 'logout';
 
 const HeaderComponent: FC<HeaderProps> = ({ collapsed, toggle }) => {
   const { logged, device } = useSelector(state => state.user);
+
+  const username = localStorage.getItem('username') ? JSON.parse(localStorage.getItem('username')!) : '';
   const { theme } = useSelector(state => state.global);
   const navigate = useNavigate();
   const token = antTheme.useToken();
@@ -103,6 +105,7 @@ const HeaderComponent: FC<HeaderProps> = ({ collapsed, toggle }) => {
               }}
             >
               <span className="user-action">
+                <span style={{ fontWeight: 'bold', textTransform: 'capitalize' }}>{username.name}</span>
                 <img src={Avator} className="user-avator" alt="avator" />
               </span>
             </Dropdown>

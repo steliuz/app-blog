@@ -10,40 +10,66 @@ import { useDispatch } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import { RoleEnum } from '@/interface/user/login';
-import { LocaleFormatter, useLocale } from '@/locales';
+import { setUserItem } from '@/stores/user.store';
 import { formatSearch } from '@/utils/formatSearch';
 
-import { loginAsync } from '../../stores/user.action';
+import { loginAsync, registerAsync } from '../../stores/user.action';
 import { LoginPage, WraperLogin } from './loginStyle';
 
 const initialValues: LoginParams = {
-  email: 'guest',
-  password: 'guest',
+  email: 'jesus2@hotmail.com',
+  password: '123654asd',
 };
 const initialValuesRegister: RegisterParams = {
-  username: '',
-  email: '',
+  name: 'stz23',
+  email: 'jesus@gmail.com',
   role: RoleEnum.creator,
-  password: '',
+  password: 'Atcode2024*',
 };
 
 const LoginForm: FC = () => {
-  const { formatMessage } = useLocale();
   const location = useLocation();
   const [activeRegister, setActiveRegister] = useState(true);
-  const [, setValueRol] = useState('creator');
+
+  const [, setValueRol] = useState('creador');
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [form] = Form.useForm();
 
   const onFinished = async (form: LoginParams) => {
-    const res = dispatch(await loginAsync(form));
+    const res = await loginAsync(form);
 
-    if (!!res) {
+    if (res) {
+      localStorage.setItem('token', res.tokens?.access.token);
+      localStorage.setItem('refreshToken', res.tokens?.refresh.token);
+      dispatch(
+        setUserItem({
+          logged: true,
+          username: res.user,
+        }),
+      );
       const search = formatSearch(location.search);
       const from = search.from || { pathname: '/' };
 
       navigate(from);
     }
+  };
+
+  const onRegister = async (form: RegisterParams) => {
+    const res = await dispatch(registerAsync(form));
+
+    if (!!res) {
+      onReset();
+
+      const search = formatSearch(location.search);
+      const from = search.from || { pathname: '/' };
+
+      navigate(from);
+    }
+  };
+
+  const onReset = () => {
+    form.resetFields();
   };
 
   const onChange1 = ({ target: { value } }: RadioChangeEvent) => {
@@ -68,49 +94,43 @@ const LoginForm: FC = () => {
                 <Form<LoginParams> onFinish={onFinished} className="login-page-form" initialValues={initialValues}>
                   <h2 className="my-0">Hellow Again!</h2>
                   <p className="mt-0">Welcome back you've been missed!</p>
-                  <Form.Item
-                    className="form-inputs"
-                    name="email"
-                    rules={[
-                      {
-                        required: true,
-                        message: formatMessage({
-                          id: 'gloabal.tips.enterUsernameMessage',
-                        }),
-                      },
-                    ]}
-                  >
-                    <>
-                      <label>{formatMessage({ id: 'gloabal.tips.email' })}</label>
+                  <>
+                    <label>Email</label>
+                    <Form.Item
+                      className="form-inputs"
+                      name="email"
+                      rules={[
+                        {
+                          required: true,
+                          message: 'Please enter your Email!',
+                        },
+                      ]}
+                    >
                       <Input type="text" size="large" />
-                    </>
-                  </Form.Item>
-                  <Form.Item
-                    name="password"
-                    className="form-inputs"
-                    rules={[
-                      {
-                        required: true,
-                        message: formatMessage({
-                          id: 'gloabal.tips.enterPasswordMessage',
-                        }),
-                      },
-                    ]}
-                  >
-                    <>
-                      <label>{formatMessage({ id: 'gloabal.tips.password' })}</label>
-                      <Input type="password" size="large" />
-                    </>
-                  </Form.Item>
+                    </Form.Item>
+                  </>
+                  <>
+                    <label>Password</label>
+                    <Form.Item
+                      name="password"
+                      className="form-inputs"
+                      rules={[
+                        {
+                          required: true,
+                          message: 'Please enter your Password!',
+                        },
+                      ]}
+                    >
+                      <Input.Password type="password" size="large" />
+                    </Form.Item>
+                  </>
                   <Form.Item>
                     <>
                       <Button size="large" htmlType="submit" type="primary" className="login-page-form_button">
-                        <LocaleFormatter id="gloabal.tips.login" />
+                        Login
                       </Button>
                       <p>
-                        {formatMessage({
-                          id: 'gloabal.tips.noAccount',
-                        })}{' '}
+                        Don't have an account?{' '}
                         <a className="custom-ancla" onClick={() => setActiveRegister(!activeRegister)}>
                           Sign up
                         </a>
@@ -123,8 +143,10 @@ const LoginForm: FC = () => {
               <>
                 <Card style={{ width: 450, maxHeight: '90%' }}>
                   <Form<RegisterParams>
+                    onFinish={onRegister}
+                    form={form}
                     className="login-page-form"
-                    initialValues={{ ...initialValuesRegister, role: 'creator' }}
+                    initialValues={initialValuesRegister}
                   >
                     <Image preview={false} width={100} src="src/assets/logo/logobook.png"></Image>
                     <h2 className="mt-0">Welcome to Bigbook!</h2>
@@ -134,77 +156,69 @@ const LoginForm: FC = () => {
                       rules={[
                         {
                           required: true,
-                          message: formatMessage({
-                            id: 'gloabal.tips.enterUsernameMessage',
-                          }),
+                          message: 'Please select your Role!',
                         },
                       ]}
                     >
                       <Radio.Group buttonStyle="solid" onChange={onChange1}>
-                        <Radio.Button value="creator">{formatMessage({ id: 'gloabal.tips.creator' })}</Radio.Button>
-                        <Radio.Button value="reader">{formatMessage({ id: 'gloabal.tips.reader' })}</Radio.Button>
+                        <Radio.Button value="creador">Creator</Radio.Button>
+                        <Radio.Button value="lector">Reader</Radio.Button>
                       </Radio.Group>
                     </Form.Item>
-                    <Form.Item
-                      className="form-inputs"
-                      name="username"
-                      rules={[
-                        {
-                          required: true,
-                          message: formatMessage({
-                            id: 'gloabal.tips.enterUsernameMessage',
-                          }),
-                        },
-                      ]}
-                    >
-                      <>
-                        <label>{formatMessage({ id: 'gloabal.tips.username' })}</label>
+                    <>
+                      <label>UserName</label>
+                      <Form.Item
+                        className="form-inputs"
+                        name="name"
+                        rules={[
+                          {
+                            required: true,
+                            message: 'Please enter your Username!',
+                          },
+                        ]}
+                      >
                         <Input type="text" size="large" />
-                      </>
-                    </Form.Item>
-                    <Form.Item
-                      className="form-inputs"
-                      name="email"
-                      rules={[
-                        {
-                          required: true,
-                          message: formatMessage({
-                            id: 'gloabal.tips.enterUsernameMessage',
-                          }),
-                        },
-                      ]}
-                    >
-                      <>
-                        <label>{formatMessage({ id: 'gloabal.tips.email' })}</label>
+                      </Form.Item>
+                    </>
+                    <>
+                      <label>Email</label>
+
+                      <Form.Item
+                        className="form-inputs"
+                        name="email"
+                        rules={[
+                          {
+                            required: true,
+                            message: 'Please enter your Email!',
+                          },
+                        ]}
+                      >
                         <Input type="text" size="large" />
-                      </>
-                    </Form.Item>
-                    <Form.Item
-                      name="password"
-                      className="form-inputs"
-                      rules={[
-                        {
-                          required: true,
-                          message: formatMessage({
-                            id: 'gloabal.tips.enterPasswordMessage',
-                          }),
-                        },
-                      ]}
-                    >
-                      <>
-                        <label>Password</label>
-                        <Input type="password" size="large" />
-                      </>
-                    </Form.Item>
+                      </Form.Item>
+                    </>
+                    <>
+                      <label>Password</label>
+                      <Form.Item
+                        name="password"
+                        className="form-inputs"
+                        rules={[
+                          {
+                            required: true,
+                            message: 'Please enter your Password!',
+                          },
+                        ]}
+                      >
+                        <Input.Password type="password" size="large" />
+                      </Form.Item>
+                    </>
+
                     <Form.Item>
                       <>
                         <Button size="large" htmlType="submit" type="primary" className="login-page-form_button">
-                          <LocaleFormatter id="gloabal.tips.register" />
+                          Register
                         </Button>
                         <p>
-                          {formatMessage({
-                            id: 'gloabal.tips.already',
-                          })}{' '}
+                          Already have an account?
                           <a className="custom-ancla" onClick={() => setActiveRegister(!activeRegister)}>
                             Sign in
                           </a>
